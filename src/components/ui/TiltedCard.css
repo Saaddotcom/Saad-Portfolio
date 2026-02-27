@@ -1,0 +1,6 @@
+.tilted-card-figure { position: relative; display: flex; align-items: center; justify-content: center; perspective: 800px; transform-style: preserve-3d; cursor: pointer; }
+.tilted-card-mobile-alert { display: none; }
+.tilted-card-inner { position: relative; transform-style: preserve-3d; }
+.tilted-card-img { object-fit: cover; border-radius: 8px; display: block; }
+.tilted-card-overlay { position: absolute; inset: 0; border-radius: 8px; }
+.tilted-card-caption { position: absolute; pointer-events: none; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; white-space: nowrap; }
