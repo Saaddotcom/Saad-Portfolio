@@ -22,8 +22,11 @@ export default function Work() {
       <section id="work" className="section work" style={{ maxWidth: '72rem', margin: '0 auto', padding: '5rem 3rem' }}>
         <p className="section-label" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.3em', color: 'var(--cyan)', margin: '0 0 0.5rem 0', fontWeight: 600 }}>SELECTED WORK · GRAPHIC DESIGN</p>
         <div className="section-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, margin: '0 0 3rem 0', color: 'var(--text)' }}>
-          <ScrollFloat animationDuration={1} ease="back.inOut(2)" scrollStart="center bottom+=50%" scrollEnd="bottom bottom-=40%" stagger={0.03}>Selected Work</ScrollFloat>
+          <ScrollFloat animationDuration={1} ease="back.inOut(2)" scrollStart="center bottom+=50%" scrollEnd="bottom bottom-=40%" stagger={0.03}>My Projects</ScrollFloat>
         </div>
+        <div style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '3rem', opacity: 0.8, maxWidth: '600px' }}>
+  I will keep uploading my projects here as I keep designing more!
+</div>
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }}>
           {PROJECTS.map((proj, i) => (
   <li

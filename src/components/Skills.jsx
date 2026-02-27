@@ -1,8 +1,19 @@
 import { useInView } from '../hooks/useInView'
 import ScrollFloat from './ui/ScrollFloat'
 
-const SKILLS = ['Canva', 'Kittl', 'CapCut', 'Alight Motion', 'Graphic Design', 'Video Editing', 'Project Management', 'Time Management', 'Creative Storytelling']
-
+const SKILLS = [
+  'Artificial Intelligence', 
+  'Machine Learning', 
+  'AI-Powered Workflows', 
+  'Graphic Design', 
+  'Smart Automation', 
+  'Creative Content Production', 
+  'Social Media Content Creation', 
+  'Project Management', 
+  'Canva', 
+  'CapCut', 
+  'Alight Motion'
+];
 export default function Skills() {
   const [ref, inView] = useInView()
 

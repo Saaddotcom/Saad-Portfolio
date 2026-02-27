@@ -22,10 +22,7 @@ export default function Contact() {
           Karachi, Pakistan
         </p>
       </div>
-      <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-        <a href="https://github.com/Saaddotcom" target="_blank" rel="noopener noreferrer" className="btn-pill" style={{ padding: '0.6rem 1.25rem', border: '2px solid var(--cyan)', color: 'var(--cyan)', background: 'transparent', borderRadius: 999, fontWeight: 500, textDecoration: 'none', transition: 'background 0.25s ease, color 0.25s ease' }}>GitHub</a>
-        <a href="www.linkedin.com/in/muhammad-saad-60b700301" target="_blank" rel="noopener noreferrer" className="btn-pill" style={{ padding: '0.6rem 1.25rem', border: '2px solid var(--cyan)', color: 'var(--cyan)', background: 'transparent', borderRadius: 999, fontWeight: 500, textDecoration: 'none', transition: 'background 0.25s ease, color 0.25s ease' }}>LinkedIn</a>
-      </div>
+     
     </section>
   )
 }

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'; // Assuming you're using react-router
+import SpotlightCard from './ui/SpotlightCard';
 import { useState, useEffect, useRef } from 'react'
 import VariableProximity from './ui/VariableProximity'
 import ClickSpark from './ui/ClickSpark'
@@ -167,7 +169,7 @@ export default function Hero() {
             className="hero-tagline"
             style={{ fontSize: '1.15rem', color: 'var(--text-muted)', margin: '0 0 0.25rem 0' }}
           >
-            I craft visuals that speak before words do.
+Bridging the gap between intelligent systems and immersive design.
           </p>
           <p
             style={{
@@ -177,62 +179,82 @@ export default function Hero() {
               margin: '0 0 2rem 0',
             }}
           >
-            Graphic Designer & Video Editor specializing in high-impact visual content, motion graphics, and
-            creative storytelling.
+            Specializing in AI-driven creativity, high-impact motion graphics, and 
+  visual storytelling that commands attention.
           </p>
-          <div className="hero-actions" style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-            <button
-              type="button"
-              onClick={() => scrollTo('work')}
-              className="btn btn-cyan"
-              style={{
-                background: 'transparent',
-                color: 'var(--cyan)',
-                border: '2px solid var(--cyan)',
-                padding: '0.75rem 1.5rem',
-                borderRadius: 8,
-                fontWeight: 600,
-                cursor: 'pointer',
-                fontFamily: 'var(--font-body)',
-              }}
-            >
-              View My Work
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('contact')}
-              className="btn btn-purple"
-              style={{
-                background: 'transparent',
-                color: 'var(--purple)',
-                border: '2px solid var(--purple)',
-                padding: '0.75rem 1.5rem',
-                borderRadius: 8,
-                fontWeight: 600,
-                cursor: 'pointer',
-                fontFamily: 'var(--font-body)',
-              }}
-            >
-              Get In Touch
-            </button>
-            <a
-              href="/M.Saad_RESUME.pdf"
-              download
-              className="btn btn-gradient"
-              style={{
-                background: 'linear-gradient(135deg, var(--cyan), var(--purple))',
-                color: '#fff',
-                border: 'none',
-                padding: '0.75rem 1.5rem',
-                borderRadius: 8,
-                fontWeight: 600,
-                boxShadow: '0 0 25px rgba(0,229,255,0.3), 0 0 50px rgba(168,85,247,0.2)',
-                textDecoration: 'none',
-              }}
-            >
-              Download Resume
-            </a>
-          </div>
+         <div className="hero-actions" style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
+  
+{/* View My Work - Now links to the Work page */}
+<SpotlightCard spotlightColor="rgba(0, 229, 255, 0.3)">
+  <Link
+    to="/work"
+    className="btn btn-cyan"
+    style={{
+      display: 'flex',           // Changed to flex
+      alignItems: 'center',      // Center text vertically
+      justifyContent: 'center',  // Center text horizontally
+      background: 'transparent',
+      color: 'var(--cyan)',
+      border: '2px solid var(--cyan)',
+      padding: '0 1.5rem',       // Set height via fixed height or consistent padding
+      height: '3rem',            // Force an exact height
+      borderRadius: 8,
+      fontWeight: 600,
+      textDecoration: 'none',
+      fontFamily: 'var(--font-body)',
+      width: '100%',
+      boxSizing: 'border-box'    // Ensure padding doesn't add to width
+    }}
+  >
+    View My Work
+  </Link>
+</SpotlightCard>
+
+{/* Get In Touch */}
+<SpotlightCard spotlightColor="rgba(168, 85, 247, 0.3)">
+  <button
+    type="button"
+    onClick={() => scrollTo('contact')}
+    className="btn btn-purple"
+    style={{
+      display: 'flex',           // Match flex
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'transparent',
+      color: 'var(--purple)',
+      border: '2px solid var(--purple)',
+      padding: '0 1.5rem',
+      height: '3rem',            // Match exact height
+      borderRadius: 8,
+      fontWeight: 600,
+      cursor: 'pointer',
+      fontFamily: 'var(--font-body)',
+      width: '100%',
+      boxSizing: 'border-box'    // Match box-sizing
+    }}
+  >
+    Get In Touch
+  </button>
+</SpotlightCard>
+            {/* Resume Button - Already has a glow/gradient effect */}
+  <a
+    href="/M.Saad_RESUME.pdf"
+    download
+    className="btn btn-gradient"
+    style={{
+      background: 'linear-gradient(135deg, var(--cyan), var(--purple))',
+      color: '#fff',
+      border: 'none',
+      padding: '0.85rem 1.5rem', // Slightly adjusted for alignment
+      borderRadius: 8,
+      fontWeight: 600,
+      boxShadow: '0 0 25px rgba(0,229,255,0.3), 0 0 50px rgba(168,85,247,0.2)',
+      textDecoration: 'none',
+    }}
+  >
+    Download My Resume
+  </a>
+</div>
         </div>
       </section>
     </ClickSpark>

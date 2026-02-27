@@ -1,0 +1,48 @@
+.card-spotlight {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-block;
+  background: transparent;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  /* Ensure the wrapper doesn't block pointer events for its children */
+  isolation: isolate; 
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y), 
+    var(--spotlight-color), 
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* This ensures clicks pass through the glow */
+  z-index: -1; /* Move the glow behind the button content */
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Ensure the button stays on top and remains interactive */
+.card-spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Helper class for the circular footer icons */
+.footer-icon-wrapper {
+  border-radius: 50% !important; /* Forces the spotlight to be a circle */
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+.footer-icon-wrapper:hover {
+  border-color: var(--cyan);
+}
