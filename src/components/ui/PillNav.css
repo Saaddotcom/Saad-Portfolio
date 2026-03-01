@@ -31,25 +31,33 @@
   }
 }
 
+/* Glassmorphism Update */
 .pill-nav-items {
   position: relative;
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, #000);
+  background: rgba(6, 0, 16, 0.4); /* Transparent Dark */
   border-radius: 9999px;
+  backdrop-filter: blur(12px); /* The Glass Effect */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle edge highlight */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .pill-logo {
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, #000);
+  background: rgba(6, 0, 16, 0.4); /* Matching Transparent Dark */
   padding: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pill-logo img {
@@ -75,6 +83,7 @@
 }
 
 .pill {
+  background: rgba(255, 255, 255, 0.05);
   display: inline-flex;
   align-items: center;
   justify-content: center;

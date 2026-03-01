@@ -7,16 +7,23 @@ const PROJECTS = [
   { src: '/Ryomen_Sukuna.png', title: 'Sukuna — Digital Poster', category: 'Graphic Design' },
   { src: '/PORSCHE.png', title: 'Porsche 718 GT4 RS — Automotive Design', category: 'Graphic Design' },
   { src: '/MAHORAGA.png', title: 'Mahoraga ADAPT — Fantasy Poster', category: 'Graphic Design' },
+  // Add these new ones:
+  { src: '/DIVO.png', title: 'Bugatti Divo — Concept Art', category: 'Graphic Design' },
+  { src: '/TOJI.png', title: 'Toji Fushiguro — Zenin Shadow', category: 'Graphic Design' },
+  { src: '/SUPRA.png', title: 'Toyota Supra — JDM Night', category: 'Graphic Design' },
 ]
 
 export default function Work() {
   const [lightbox, setLightbox] = useState(null)
-  const [ref0, inView0] = useInView()
-  const [ref1, inView1] = useInView()
-  const [ref2, inView2] = useInView()
-  const refs = [ref0, ref1, ref2]
-  const inViews = [inView0, inView1, inView2]
+const [ref0, inView0] = useInView({ threshold: 0.1, triggerOnce: true });
+const [ref1, inView1] = useInView({ threshold: 0.1, triggerOnce: true });
+const [ref2, inView2] = useInView({ threshold: 0.1, triggerOnce: true });
+const [ref3, inView3] = useInView({ threshold: 0.1, triggerOnce: true }); // New
+const [ref4, inView4] = useInView({ threshold: 0.1, triggerOnce: true }); // New
+const [ref5, inView5] = useInView({ threshold: 0.1, triggerOnce: true }); // New
 
+const refs = [ref0, ref1, ref2, ref3, ref4, ref5];
+const inViews = [inView0, inView1, inView2, inView3, inView4, inView5];
   return (
     <>
       <section id="work" className="section work" style={{ maxWidth: '72rem', margin: '0 auto', padding: '5rem 3rem' }}>

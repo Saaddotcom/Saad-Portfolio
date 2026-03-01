@@ -1,4 +1,4 @@
-import { useEffect } from 'react'; // Combined here
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import PillNav from './components/ui/PillNav';
 import Hero from './components/Hero'
@@ -7,13 +7,11 @@ import Work from './components/Work'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import FloatingLines from './components/FloatingLines'
 import ClickSpark from './components/ui/ClickSpark'
+import ColorBends from './components/ui/ColorBends';
 
-// 1. Moving the Scroll Logic into a helper component
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
-
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
@@ -25,7 +23,6 @@ function ScrollToTop() {
       }
     }
   }, [pathname, hash]);
-
   return null;
 }
 
@@ -41,37 +38,41 @@ function Navigation() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', width: '100%', position: 'fixed', top: '1.5rem', zIndex: 1000 }}>
      <PillNav 
-        // Update this line to use your new logo file
-        logo="/MS.png" 
-        logoAlt="MS Logo"
-        items={navItems}
-        activeHref={location.pathname}
-        baseColor="#060010" 
- 	 pillColor="var(--cyan)"
- 	 pillTextColor="#060010"
- 	 hoveredPillTextColor="#000"
-      />
+  logo="/MS.png" 
+  logoAlt="MS Logo"
+  items={navItems}
+  activeHref={location.pathname}
+  // Change baseColor to match the CSS RGBA for consistency
+  baseColor="rgba(6, 0, 16, 0.4)" 
+  pillColor="transparent" // Let the CSS handle the pill background
+  pillTextColor="#00e5ff"  // Your Cyan color for the text
+  hoveredPillTextColor="#000"
+/>
     </div>
   );
 }
 
-
 export default function App() {
   return (
     <Router>
-      <ScrollToTop /> {/* This handles the cross-page jumping */}
+      <ScrollToTop />
       <ClickSpark sparkColor='#00e5ff'> 
-        <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.35 }}>
-          <FloatingLines
-            enabledWaves={['top', 'middle', 'bottom']}
-            lineCount={9}
-            lineDistance={5}
-            bendRadius={5}
-            bendStrength={-0.5}
-            interactive={true}
-            parallax={true}
-            linesGradient={['#00e5ff', '#a855f7', '#00e5ff']}
-            mixBlendMode="screen"
+        
+        {/* NEW ANIMATED BACKGROUND LAYER */}
+        <div style={{ 
+          position: 'fixed', 
+          inset: 0, 
+          zIndex: -1, 
+          background: '#050505' 
+        }}>
+          <ColorBends 
+            colors={["#00e5ff", "#8a5cff", "#000000"]} // Cyan to Purple to Black
+            speed={0.15} 
+            scale={1.0} 
+            rotation={0}
+            warpStrength={1.0}
+            noise={0.05}
+            transparent={true}
           />
         </div>
 
