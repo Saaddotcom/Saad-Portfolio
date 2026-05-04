@@ -1,0 +1,115 @@
+.magic-bento-section {
+  position: relative;
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+
+.magic-bento-grid {
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 0.9fr));
+  justify-content: center;
+}
+
+.magic-bento-card {
+  position: relative;
+  min-height: 165px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(132, 0, 255, 0.28);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.magic-bento-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(var(--glow-color, 132, 0, 255), 0.42),
+    rgba(30, 64, 175, 0.16) 36%,
+    transparent 62%
+  );
+}
+
+.magic-bento-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c084fc;
+}
+
+.magic-bento-card h3 {
+  margin-top: 0.4rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+
+.magic-bento-card p {
+  margin-top: 0.5rem;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+.magic-bento-spotlight {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--glow-color, 132, 0, 255), 0.2), rgba(30, 64, 175, 0.08), transparent 68%);
+  filter: blur(4px);
+}
+
+.magic-bento-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(var(--glow-color, 132, 0, 255), 0.95);
+  box-shadow: 0 0 9px rgba(var(--glow-color, 132, 0, 255), 0.6);
+  pointer-events: none;
+}
+
+.magic-bento-ripple {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(var(--glow-color, 132, 0, 255), 0.4), transparent 70%);
+}
+
+@media (min-width: 1024px) {
+  .magic-bento-grid {
+    grid-template-columns: repeat(3, minmax(0, 0.92fr));
+  }
+
+  .magic-bento-card:nth-child(3) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .magic-bento-section {
+    transform: none;
+  }
+
+  .magic-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}

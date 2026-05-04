@@ -1,196 +1,112 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
 import VariableProximity from './ui/VariableProximity'
+import ProfileCard from './ui/ProfileCard'
 
 const SUBTITLE = 'AI Student & Creative Designer'
-const TYPE_MS = 50
-const GLITCH_REMOVE_MS = 800
+const TYPE_MS = 45
 
 export default function Hero() {
-  const [glitch, setGlitch] = useState(true)
   const [typed, setTyped] = useState('')
   const [showCursor, setShowCursor] = useState(true)
-  const containerRef = useRef(null)
+  const nameContainerRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const cardRef = useRef(null)
 
   useEffect(() => {
-    const t = setTimeout(() => setGlitch(false), GLITCH_REMOVE_MS)
-    return () => clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
-    if (glitch) return
     let i = 0
-    const id = setInterval(() => {
-      i++
+    const interval = setInterval(() => {
+      i += 1
       if (i <= SUBTITLE.length) {
         setTyped(SUBTITLE.slice(0, i))
       } else {
         setShowCursor(false)
-        clearInterval(id)
+        clearInterval(interval)
       }
     }, TYPE_MS)
-    return () => clearInterval(id)
-  }, [glitch])
+    return () => clearInterval(interval)
+  }, [])
 
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    const section = document.querySelector('#hero')
+    if (!section || !cardRef.current || !subtitleRef.current) return
+
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect()
+      const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight))
+      const cardScale = 1 + progress * 0.2
+      cardRef.current.style.transform = `scale(${cardScale})`
+      subtitleRef.current.style.transform = `translateY(${progress * 26}px) scale(${1 - progress * 0.08})`
+      subtitleRef.current.style.opacity = `${1 - progress * 0.35}`
     }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const handleHireNow = (event) => {
+    event.preventDefault()
+    const target = document.querySelector('#contact')
+    if (!target) return
+    gsap.to(window, {
+      duration: 1,
+      ease: 'main',
+      scrollTo: { y: target, offsetY: 90 }
+    })
   }
 
   return (
-    <section
-      id="hero"
-      style={{
-        position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem', // Reduced padding for mobile
-        overflow: 'hidden',
-        background: 'transparent'
-      }}
-    >
-      {/* THE GLASS CARD */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          maxWidth: '950px',
-          width: '100%',
-          padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem)', // Responsive padding
-          background: 'rgba(255, 255, 255, 0.07)', 
-          backdropFilter: 'blur(12px)',           
-          WebkitBackdropFilter: 'blur(12px)',     
-          border: '1px solid rgba(255, 255, 255, 0.15)', 
-          borderRadius: '30px',                   
-          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
-          boxSizing: 'border-box', // Crucial to prevent overflow
-        }}
-      >
-        <p
-          style={{
-            fontSize: 'clamp(0.55rem, 2vw, 0.65rem)', // Responsive font
-            textTransform: 'uppercase',
-            letterSpacing: '0.4em',
-            color: 'var(--cyan)',
-            margin: '0 0 0.75rem 0',
-            fontWeight: 400,
-            fontFamily: '"League Spartan", sans-serif',
-          }}
-        >
-          HELLO, I'M
-        </p>
-
-        <div
-          ref={containerRef}
-          className={glitch ? 'glitch-once' : ''}
-          style={{ 
-            position: 'relative', 
-            margin: '0 0 1rem 0',
-            overflow: 'visible' // Ensure variable font doesn't clip
-          }}
-        >
+    <section id="hero" className="hero-panel standalone-hero">
+      <div className="hero-foreground">
+        <p className="hero-kicker">Digital storyteller</p>
+        <div ref={nameContainerRef} className="hero-name-wrap">
           <VariableProximity
             label="Muhammad Saad"
             fromFontVariationSettings="'wght' 400, 'opsz' 9"
             toFontVariationSettings="'wght' 900, 'opsz' 40"
-            containerRef={containerRef}
-            radius={120}
+            containerRef={nameContainerRef}
+            radius={140}
             falloff="gaussian"
+            className="hero-name-display"
             style={{
-              fontSize: 'clamp(2.5rem, 12vw, 7rem)', // Lowered minimum for mobile
-              fontFamily: '"League Spartan", sans-serif',
-              // Safari fix: ensure background covers the text and has a fallback
-              background: 'linear-gradient(to right, #00e5ff, #a855f7)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              lineHeight: 1.05,
-              fontWeight: 400,
-              display: 'block', // Safari rendering fix
-              width: '100%',
-              wordWrap: 'break-word', // Prevents overflow on very small screens
+              fontSize: 'clamp(2.9rem, 11vw, 8.2rem)',
+              fontFamily: '"Cormorant Garamond", serif',
+              color: '#ffffff',
+              lineHeight: 0.95,
+              letterSpacing: '0.02em',
+              textShadow:
+                '0 0 28px rgba(0, 0, 0, 0.9), 0 2px 12px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.5)'
             }}
           />
         </div>
-
-        <p
-          style={{
-            fontFamily: '"League Spartan", sans-serif',
-            fontSize: 'clamp(1.1rem, 4vw, 1.35rem)', // Responsive font
-            fontWeight: 600,
-            color: 'var(--text)',
-            margin: '0 0 0.5rem 0',
-            minHeight: '1.6em',
-          }}
-        >
+        <p ref={subtitleRef} className="hero-subtitle">
           {typed}
           {showCursor && <span className="cursor-blink">|</span>}
         </p>
-
-        <p style={{ fontSize: 'clamp(1rem, 3vw, 1.15rem)', color: 'var(--text-muted)', margin: '0 0 0.25rem 0' }}>
-          Bridging the gap between intelligent systems and immersive design.
+        <p className="hero-copy">
+          I craft cinematic digital moments where AI engineering and bold visual design collide.
         </p>
-
-        <p style={{ fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)', color: 'var(--text-muted)', maxWidth: '42ch', margin: '0 0 2rem 0' }}>
-          Specializing in AI-driven creativity, high-impact motion graphics, and visual storytelling.
-        </p>
-
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Link
-            to="/work"
-            style={{
-              padding: '0.8rem 1.25rem',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '8px',
-              color: 'var(--cyan)',
-              fontWeight: 600,
-              textDecoration: 'none',
-              backdropFilter: 'blur(5px)',
-              fontSize: '0.9rem'
-            }}
-          >
-            View My Work
-          </Link>
-
-          <button
-            onClick={() => scrollTo('contact')}
-            style={{
-              padding: '0.8rem 1.25rem',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '8px',
-              color: 'var(--purple)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              backdropFilter: 'blur(5px)',
-              fontSize: '0.9rem'
-            }}
-          >
-            Get In Touch
-          </button>
-
-          <a
-            href="/M.Saad_RESUME.pdf"
-            download
-            style={{
-              background: 'linear-gradient(135deg, var(--cyan), var(--purple))',
-              color: '#fff',
-              padding: '0.8rem 1.25rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              textDecoration: 'none',
-              boxShadow: '0 0 25px rgba(0,229,255,0.3)',
-              fontSize: '0.9rem'
-            }}
-          >
-            Download Resume
-          </a>
+        <div className="hero-actions">
+          <Link className="hero-btn magnetic-target" to="/work">My Work</Link>
+          <a className="hero-btn hero-btn-primary magnetic-target" href="#contact" onClick={handleHireNow}>Hire me now</a>
+          <a className="hero-btn magnetic-target" href="/M.Saad_RESUME.pdf" download>Download Resume</a>
         </div>
+      </div>
+      <div ref={cardRef} className="hero-card-wrap">
+        <ProfileCard
+          avatarUrl="/linkedin_pic.jpeg"
+          miniAvatarUrl="/linkedin_pic.jpeg"
+          name="Muhammad Saad"
+          title="AI Student & Creative Designer"
+          handle="muhammadsaad"
+          status="Open for collaborations"
+          contactText="Let's build"
+          enableMobileTilt
+          onContactClick={() => {
+            const contact = document.getElementById('contact')
+            if (contact) contact.scrollIntoView({ behavior: 'smooth' })
+          }}
+        />
       </div>
     </section>
   )
